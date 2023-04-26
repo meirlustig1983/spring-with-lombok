@@ -8,10 +8,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-@Setter
-@Getter
+@Data
 @Entity
 public class Employee {
     @EqualsAndHashCode.Exclude
@@ -28,12 +25,4 @@ public class Employee {
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Address> addresses;
     private Date createdDate;
-
-    public Employee(String lastName, String firstName, String middleName, String suffix, Date createdDate) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.suffix = suffix;
-        this.createdDate = createdDate;
-    }
 }

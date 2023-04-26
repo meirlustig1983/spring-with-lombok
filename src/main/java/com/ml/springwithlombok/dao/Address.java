@@ -7,10 +7,7 @@ import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-@Setter
-@Getter
+@Data
 @Entity
 public class Address {
 
