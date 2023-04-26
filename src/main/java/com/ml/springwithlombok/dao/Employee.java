@@ -6,10 +6,10 @@ import lombok.*;
 import java.util.Date;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

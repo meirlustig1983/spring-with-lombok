@@ -5,10 +5,10 @@ import lombok.*;
 
 import java.util.Date;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address {
 
     @ToString.Exclude
