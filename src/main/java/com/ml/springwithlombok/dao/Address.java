@@ -15,7 +15,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name= "employee_id", nullable = false)
+    @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
     private String addressType;
     private String addressLine1;

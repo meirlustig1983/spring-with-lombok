@@ -23,33 +23,33 @@ public class AddressService {
         this.addressRepository = addressRepository;
     }
 
-    public RestContainer<?> findAddresses(){
+    public RestContainer<?> findAddresses() {
         LOGGER.info("AddressService.findAddresses() - retrieving all addresses");
         final List<Address> allAddresses = addressRepository.findAll();
 
-        if(allAddresses.isEmpty()){
+        if (allAddresses.isEmpty()) {
             return new RestContainer<>("No Records Found", "Address");
         } else {
             return new RestContainer<>(addressListConverter(allAddresses), "Address");
         }
     }
 
-    public RestContainer<?> findAddressesByCity(String city){
+    public RestContainer<?> findAddressesByCity(String city) {
         LOGGER.info("AddressService.findAddressesByCity(...) - retrieving all addresses by city");
         final List<Address> cityAddresses = addressRepository.findByCity(city);
 
-        if(cityAddresses.isEmpty()){
+        if (cityAddresses.isEmpty()) {
             return new RestContainer<>("No Records Found", "Address");
         } else {
             return new RestContainer<>(addressListConverter(cityAddresses), "Address");
         }
     }
 
-    public RestContainer<?> findAddressesByState(String state){
+    public RestContainer<?> findAddressesByState(String state) {
         LOGGER.info("AddressService.findAddressesByState(...) - retrieving all addresses by state");
         final List<Address> stateAddresses = addressRepository.findByState(state);
 
-        if(stateAddresses.isEmpty()){
+        if (stateAddresses.isEmpty()) {
             return new RestContainer<>("No Records Found", "Address");
         } else {
             return new RestContainer<>(addressListConverter(stateAddresses), "Address");
@@ -59,7 +59,7 @@ public class AddressService {
     private List<AddressDto> addressListConverter(List<Address> addresses) {
         LOGGER.info("AddressService.addressConverter - converting Address Entity to Address DTO");
         List<AddressDto> addressDtos = new ArrayList<>();
-        for(Address address : addresses){
+        for (Address address : addresses) {
             addressDtos.add(
                     new AddressDto(
                             address.getId(),

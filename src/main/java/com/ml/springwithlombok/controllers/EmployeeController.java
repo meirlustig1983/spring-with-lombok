@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 public class EmployeeController {
 
@@ -23,17 +21,17 @@ public class EmployeeController {
     }
 
     @GetMapping("/rest/employee/all")
-    public RestContainer<?> listEmployees(){
+    public RestContainer<?> listEmployees() {
         return employeeService.findEmployees();
     }
 
     @GetMapping("/rest/employee/search/{lastName}")
-    public RestContainer<?> listEmployeesByLastName(@PathVariable("lastName")String lastName){
+    public RestContainer<?> listEmployeesByLastName(@PathVariable("lastName") String lastName) {
         return employeeService.findEmployeesByLastName(lastName);
     }
 
     @GetMapping("/rest/employee/get/{employeeId}")
-    public RestContainer<?> listEmployeesByLastName(@PathVariable("employeeId")Long employeeId){
+    public RestContainer<?> listEmployeesByLastName(@PathVariable("employeeId") Long employeeId) {
         return employeeService.findEmployeeById(employeeId);
     }
 

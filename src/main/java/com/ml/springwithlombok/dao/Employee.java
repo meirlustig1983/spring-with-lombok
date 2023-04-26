@@ -23,6 +23,27 @@ public class Employee {
     private List<Address> addresses;
     private Date createdDate;
 
+    public Employee() {
+    }
+
+    public Employee(String lastName, String firstName, String middleName, String suffix, Date createdDate) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.suffix = suffix;
+        this.createdDate = createdDate;
+    }
+
+    public Employee(String lastName, String firstName, String middleName, String suffix,
+                    List<Address> addresses, Date createdDate) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.suffix = suffix;
+        this.addresses = addresses;
+        this.createdDate = createdDate;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -47,25 +68,5 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(id, lastName, firstName, middleName, suffix, addresses, createdDate);
-    }
-
-    public Employee() {
-    }
-
-    public Employee(String lastName, String firstName, String middleName, String suffix, Date createdDate) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.suffix = suffix;
-        this.createdDate = createdDate;
-    }
-    public Employee(String lastName, String firstName, String middleName, String suffix,
-                    List<Address> addresses, Date createdDate) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.suffix = suffix;
-        this.addresses = addresses;
-        this.createdDate = createdDate;
     }
 }
