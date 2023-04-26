@@ -29,31 +29,31 @@ public class EmployeeService {
     }
 
 
-    public RestContainer<?> findEmployees(){
+    public RestContainer<?> findEmployees() {
         LOGGER.info("EmployeeService.findEmployees() - retrieving all employees");
         final List<Employee> employees = employeeRepository.findAll();
-        if(employees.isEmpty()){
+        if (employees.isEmpty()) {
             return new RestContainer<>("No Records Found", "Employee");
         } else {
             return new RestContainer<>(employeeListConverter(employees), "Employee");
         }
     }
 
-    public RestContainer<?> findEmployeesByLastName(String lastName){
+    public RestContainer<?> findEmployeesByLastName(String lastName) {
         LOGGER.info("EmployeeService.findEmployeesByLastName() - retrieving all employees with lastName of {lastName}", lastName);
         final List<Employee> employees = employeeRepository.findByLastName(lastName);
-        if(employees.isEmpty()){
+        if (employees.isEmpty()) {
             return new RestContainer<>("No Employees Found", "Employee");
         } else {
             return new RestContainer<>(employeeListConverter(employees), "Employee");
         }
     }
 
-    public RestContainer<?> findEmployeeById(Long id){
+    public RestContainer<?> findEmployeeById(Long id) {
         LOGGER.info("EmployeeService.findEmployeeById(...) - retrieving employee with id of {id}", id);
         final Optional<Employee> employee = employeeRepository.findById(id);
 
-        if(employee.isPresent()){
+        if (employee.isPresent()) {
             Employee emp = employee.get();
             return new RestContainer<>(
                     employeeConverter(emp), "employee"
@@ -63,11 +63,11 @@ public class EmployeeService {
         }
     }
 
-    private List<EmployeeDto> employeeListConverter(List<Employee> employees){
+    private List<EmployeeDto> employeeListConverter(List<Employee> employees) {
         LOGGER.info("EmployeeService.employeeConverter - converting Employee Entity to Employee DTO");
         List<EmployeeDto> employeeDtos = new ArrayList<>();
 
-        for(Employee emp : employees){
+        for (Employee emp : employees) {
             employeeDtos.add(
                     employeeConverter(emp)
             );
@@ -78,7 +78,7 @@ public class EmployeeService {
     private List<AddressDto> addressListConverter(List<Address> addresses) {
         LOGGER.info("EmployeeService.addressConverter - converting Address Entity to Address DTO");
         List<AddressDto> addressDtos = new ArrayList<>();
-        for(Address address : addresses){
+        for (Address address : addresses) {
             addressDtos.add(
                     new AddressDto(
                             address.getId(),
@@ -95,7 +95,7 @@ public class EmployeeService {
         return addressDtos;
     }
 
-    private EmployeeDto employeeConverter(Employee employee){
+    private EmployeeDto employeeConverter(Employee employee) {
         return new EmployeeDto(
                 employee.getId(),
                 employee.getLastName(),

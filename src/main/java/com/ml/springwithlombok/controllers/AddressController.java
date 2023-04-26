@@ -16,22 +16,23 @@ public class AddressController {
 
     @Autowired
     private final AddressService addressService;
+
     public AddressController(AddressService addressService) {
         this.addressService = addressService;
     }
 
     @GetMapping("/rest/address/all")
-    public RestContainer<?> listAddresses(){
+    public RestContainer<?> listAddresses() {
         return addressService.findAddresses();
     }
 
     @GetMapping("/rest/address/search/city/{city}")
-    public RestContainer<?> listAddressesByCity(@PathVariable("city")String city){
+    public RestContainer<?> listAddressesByCity(@PathVariable("city") String city) {
         return addressService.findAddressesByCity(city);
     }
 
     @GetMapping("/rest/address/search/state/{state}")
-    public RestContainer<?> listAddressesByState(@PathVariable("state")String state){
+    public RestContainer<?> listAddressesByState(@PathVariable("state") String state) {
         return addressService.findAddressesByState(state);
     }
 
