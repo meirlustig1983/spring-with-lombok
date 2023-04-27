@@ -4,6 +4,7 @@ import com.ml.springwithlombok.dao.Address;
 import com.ml.springwithlombok.dto.AddressDto;
 import com.ml.springwithlombok.repositories.AddressRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -21,19 +22,19 @@ public class AddressService {
 
     public List<AddressDto> findAddresses() {
         LOGGER.info("AddressService.findAddresses() - retrieving all addresses");
-        final List<Address> allAddresses = addressRepository.findAll();
+        val allAddresses = addressRepository.findAll();
         return addressListConverter(allAddresses);
     }
 
     public List<AddressDto> findAddressesByCity(String city) {
         LOGGER.info("AddressService.findAddressesByCity(...) - retrieving all addresses by city. value: {}", city);
-        final List<Address> cityAddresses = addressRepository.findByCity(city);
+        val cityAddresses = addressRepository.findByCity(city);
         return addressListConverter(cityAddresses);
     }
 
     public List<AddressDto> findAddressesByState(String state) {
         LOGGER.info("AddressService.findAddressesByState(...) - retrieving all addresses by state. value: {}", state);
-        final List<Address> stateAddresses = addressRepository.findByState(state);
+        val stateAddresses = addressRepository.findByState(state);
         return addressListConverter(stateAddresses);
     }
 

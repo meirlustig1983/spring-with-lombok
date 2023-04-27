@@ -3,6 +3,7 @@ package com.ml.springwithlombok.controllers;
 import com.ml.springwithlombok.dto.EmployeeImageDto;
 import com.ml.springwithlombok.services.EmployeeImageService;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +27,7 @@ public class EmployeeImageController {
 
     @GetMapping("/all")
     public ResponseEntity<List<EmployeeImageDto>> listEmployees() {
-        final List<EmployeeImageDto> employeeImageList = employeeImageService.findAllEmployeeImages();
+        val employeeImageList = employeeImageService.findAllEmployeeImages();
         if (employeeImageList.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
