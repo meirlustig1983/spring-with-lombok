@@ -58,21 +58,25 @@ public class EmployeeService {
 
     private List<EmployeeDto> employeeListConverter(List<Employee> employees) {
         LOGGER.info("EmployeeService.employeeConverter - converting Employee Entity to Employee DTO");
-        List<EmployeeDto> employeeDtos = new ArrayList<>();
+        List<EmployeeDto> employeeDtoList = new ArrayList<>();
 
         for (Employee emp : employees) {
-            employeeDtos.add(
+            employeeDtoList.add(
                     employeeConverter(emp)
             );
         }
-        return employeeDtos;
+        return employeeDtoList;
     }
 
     private List<AddressDto> addressListConverter(List<Address> addresses) {
         LOGGER.info("EmployeeService.addressConverter - converting Address Entity to Address DTO");
-        List<AddressDto> addressDtos = new ArrayList<>();
+        return getAddressDtoList(addresses);
+    }
+
+    static List<AddressDto> getAddressDtoList(List<Address> addresses) {
+        List<AddressDto> addressDtoList = new ArrayList<>();
         for (Address address : addresses) {
-            addressDtos.add(
+            addressDtoList.add(
                     new AddressDto(
                             address.getId(),
                             address.getAddressType(),
@@ -85,7 +89,7 @@ public class EmployeeService {
                     )
             );
         }
-        return addressDtos;
+        return addressDtoList;
     }
 
     private EmployeeDto employeeConverter(Employee employee) {
