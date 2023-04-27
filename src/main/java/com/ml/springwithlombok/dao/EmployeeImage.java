@@ -29,5 +29,6 @@ public class EmployeeImage {
     private byte[] image;
 
     @NonNull
-    private Date createdDate;
+    @Builder.Default
+    private Date createdDate = new Date();
 }
