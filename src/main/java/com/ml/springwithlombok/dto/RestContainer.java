@@ -1,8 +1,8 @@
 package com.ml.springwithlombok.dto;
 
 public class RestContainer<T> {
-    final private T record;
-    final private String type;
+    private final T record;
+    private final String type;
 
     public RestContainer(T record, String type) {
         this.record = record;
