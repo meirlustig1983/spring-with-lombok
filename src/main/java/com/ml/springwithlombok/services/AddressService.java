@@ -2,7 +2,6 @@ package com.ml.springwithlombok.services;
 
 import com.ml.springwithlombok.dao.Address;
 import com.ml.springwithlombok.dto.AddressDto;
-import com.ml.springwithlombok.dto.RestContainer;
 import com.ml.springwithlombok.repositories.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -20,37 +19,22 @@ public class AddressService {
 
     private final AddressRepository addressRepository;
 
-    public RestContainer<?> findAddresses() {
+    public List<AddressDto> findAddresses() {
         LOGGER.info("AddressService.findAddresses() - retrieving all addresses");
         final List<Address> allAddresses = addressRepository.findAll();
-
-        if (allAddresses.isEmpty()) {
-            return new RestContainer<>("No Records Found", "Address");
-        } else {
-            return new RestContainer<>(addressListConverter(allAddresses), "Address");
-        }
+        return addressListConverter(allAddresses);
     }
 
-    public RestContainer<?> findAddressesByCity(String city) {
-        LOGGER.info("AddressService.findAddressesByCity(...) - retrieving all addresses by city");
+    public List<AddressDto> findAddressesByCity(String city) {
+        LOGGER.info("AddressService.findAddressesByCity(...) - retrieving all addresses by city. value: {}", city);
         final List<Address> cityAddresses = addressRepository.findByCity(city);
-
-        if (cityAddresses.isEmpty()) {
-            return new RestContainer<>("No Records Found", "Address");
-        } else {
-            return new RestContainer<>(addressListConverter(cityAddresses), "Address");
-        }
+        return addressListConverter(cityAddresses);
     }
 
-    public RestContainer<?> findAddressesByState(String state) {
-        LOGGER.info("AddressService.findAddressesByState(...) - retrieving all addresses by state");
+    public List<AddressDto> findAddressesByState(String state) {
+        LOGGER.info("AddressService.findAddressesByState(...) - retrieving all addresses by state. value: {}", state);
         final List<Address> stateAddresses = addressRepository.findByState(state);
-
-        if (stateAddresses.isEmpty()) {
-            return new RestContainer<>("No Records Found", "Address");
-        } else {
-            return new RestContainer<>(addressListConverter(stateAddresses), "Address");
-        }
+        return addressListConverter(stateAddresses);
     }
 
     private List<AddressDto> addressListConverter(List<Address> addresses) {

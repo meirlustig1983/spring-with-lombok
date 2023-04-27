@@ -5,21 +5,20 @@ import lombok.*;
 
 import java.util.Date;
 
+@Builder
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class Address {
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    private Long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "employee_id", nullable = false)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Employee employee;
     private String addressType;
     private String addressLine1;
