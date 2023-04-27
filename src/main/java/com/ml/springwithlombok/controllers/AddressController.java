@@ -3,6 +3,7 @@ package com.ml.springwithlombok.controllers;
 import com.ml.springwithlombok.dto.AddressDto;
 import com.ml.springwithlombok.services.AddressService;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -25,7 +26,7 @@ public class AddressController {
 
     @GetMapping("/all")
     public ResponseEntity<List<AddressDto>> listAddresses() {
-        final List<AddressDto> addresses = addressService.findAddresses();
+        val addresses = addressService.findAddresses();
         if (addresses.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -34,7 +35,7 @@ public class AddressController {
 
     @GetMapping("/search/{city}/city")
     public ResponseEntity<List<AddressDto>> listAddressesByCity(@PathVariable("city") String city) {
-        final List<AddressDto> addressesByCity = addressService.findAddressesByCity(city);
+        val addressesByCity = addressService.findAddressesByCity(city);
         if (addressesByCity.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -43,7 +44,7 @@ public class AddressController {
 
     @GetMapping("/search/{state}/state")
     public ResponseEntity<List<AddressDto>> listAddressesByState(@PathVariable("state") String state) {
-        final List<AddressDto> addressesByState = addressService.findAddressesByState(state);
+        val addressesByState = addressService.findAddressesByState(state);
         if (addressesByState.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
