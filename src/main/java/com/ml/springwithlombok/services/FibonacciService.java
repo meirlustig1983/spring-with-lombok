@@ -21,11 +21,11 @@ public class FibonacciService {
         result.add(BigInteger.ZERO);
         result.add(BigInteger.ONE);
 
-        int limit = 10000;
+        int limit = 11;
         for (int i = 2; i < limit; i++) {
             result.add(result.get(i - 1).add(result.get(i - 2)));
         }
-        log.info("FibonacciService.calculateFibonacciSequence() - completed");
+        log.info("FibonacciService.calculateFibonacciSequence() - completed, result: {}", result);
         return result;
     }
 }
