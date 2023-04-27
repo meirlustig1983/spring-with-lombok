@@ -25,7 +25,8 @@ public class Address {
     private Employee employee;
 
     @NonNull
-    private String addressType;
+    @Builder.Default
+    private String addressType = "home";
 
     @NonNull
     private String addressLine1;
@@ -42,5 +43,6 @@ public class Address {
     private String zipCode;
 
     @NonNull
-    private Date createdDate;
+    @Builder.Default
+    private Date createdDate = new Date();
 }

@@ -49,5 +49,6 @@ public class Employee {
     private EmployeeStatus employeeStatus = EmployeeStatus.FULL_TIME;
 
     @NonNull
-    private Date createdDate;
+    @Builder.Default
+    private Date createdDate = new Date();
 }

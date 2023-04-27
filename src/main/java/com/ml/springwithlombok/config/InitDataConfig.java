@@ -16,7 +16,6 @@ import org.springframework.util.StreamUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 
 @Configuration
 public class InitDataConfig {
@@ -36,7 +35,6 @@ public class InitDataConfig {
                     .middleName("Cleveland")
                     .suffix("Jr")
                     .email("tcr@gmail.com")
-                    .createdDate(new Date())
                     .build();
 
             Employee franklinEmployee = employeeBuilder
@@ -45,7 +43,6 @@ public class InitDataConfig {
                     .middleName("Paul")
                     .suffix("Sr")
                     .email("fbp@gmail.com")
-                    .createdDate(new Date())
                     .build();
 
             employeeRepository.save(theodoreEmployee);
@@ -60,7 +57,6 @@ public class InitDataConfig {
                     .city("Boston")
                     .state("MA")
                     .zipCode("02109")
-                    .createdDate(new Date())
                     .build();
 
             Address theodoreAddress = addressBuilder
@@ -71,7 +67,6 @@ public class InitDataConfig {
                     .city("New York City")
                     .state("NY")
                     .zipCode("10003")
-                    .createdDate(new Date())
                     .build();
 
             addressRepository.save(franklinAddress);
@@ -85,13 +80,11 @@ public class InitDataConfig {
             EmployeeImage theodoreImage = employeeImageBuilder
                     .employee(theodoreEmployee)
                     .image(rooseveltImg)
-                    .createdDate(new Date())
                     .build();
 
             EmployeeImage franklinImage = employeeImageBuilder
                     .employee(franklinEmployee)
                     .image(franklinImg)
-                    .createdDate(new Date())
                     .build();
 
             employeeImageRepository.save(theodoreImage);
