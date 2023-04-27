@@ -9,36 +9,35 @@ import com.ml.springwithlombok.enums.EmployeeStatus;
 import com.ml.springwithlombok.repositories.EmployeeImageRepository;
 import com.ml.springwithlombok.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class EmployeeService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeService.class);
 
     private final EmployeeRepository employeeRepository;
     private final EmployeeImageRepository employeeImageRepository;
 
     public List<EmployeeDto> findEmployees() {
-        LOGGER.info("EmployeeService.findEmployees() - retrieving all employees");
+        log.info("EmployeeService.findEmployees() - retrieving all employees");
         val employees = employeeRepository.findAll();
         return employeeListConverter(employees);
     }
 
     public List<EmployeeDto> findEmployeesByLastName(final String lastName) {
-        LOGGER.info("EmployeeService.findEmployeesByLastName() - retrieving all employees with lastName of {}", lastName);
+        log.info("EmployeeService.findEmployeesByLastName() - retrieving all employees with lastName of {}", lastName);
         val employees = employeeRepository.findByLastName(lastName);
         return employeeListConverter(employees);
     }
 
     public EmployeeDto findEmployeeById(final Long id) {
-        LOGGER.info("EmployeeService.findEmployeeById(...) - retrieving employee with id of {}", id);
+        log.info("EmployeeService.findEmployeeById(...) - retrieving employee with id of {}", id);
         val employee = employeeRepository.findById(id);
 
         if (employee.isPresent()) {
@@ -50,14 +49,14 @@ public class EmployeeService {
     }
 
     public EmployeeDto updateEmployeeStatus(final Long employeeId, final String employeeStatus) {
-        LOGGER.info("EmployeeService.updateEmployeeStatus(...) - retrieving employee with employeeId of {} and updating with status {}", employeeId, employeeStatus);
+        log.info("EmployeeService.updateEmployeeStatus(...) - retrieving employee with employeeId of {} and updating with status {}", employeeId, employeeStatus);
         val employeeById = findEmployeeById(employeeId);
         val employeeDto = employeeById.withEmployeeStatus(EmployeeStatus.convert(employeeStatus));
         return updateEmployee(employeeDto);
     }
 
     public EmployeeDto updateEmployeeEmail(final Long employeeId, final String employeeEmail) {
-        LOGGER.info("EmployeeService.updateEmployeeEmail(...) - retrieving employee with employeeId of {} and updating with email {}", employeeId, employeeEmail);
+        log.info("EmployeeService.updateEmployeeEmail(...) - retrieving employee with employeeId of {} and updating with email {}", employeeId, employeeEmail);
         val employeeById = findEmployeeById(employeeId);
         val employeeDto = employeeById.withEmail(employeeEmail);
         return updateEmployee(employeeDto);
@@ -86,7 +85,7 @@ public class EmployeeService {
     }
 
     private List<EmployeeDto> employeeListConverter(List<Employee> employees) {
-        LOGGER.info("EmployeeService.employeeConverter - converting Employee Entity to Employee DTO");
+        log.info("EmployeeService.employeeConverter - converting Employee Entity to Employee DTO");
         val employeeDtoList = new ArrayList<EmployeeDto>();
         for (Employee emp : employees) {
             employeeDtoList.add(employeeConverter(emp));
@@ -95,7 +94,7 @@ public class EmployeeService {
     }
 
     public static List<AddressDto> addressListConverter(List<Address> addresses) {
-        LOGGER.info("EmployeeService.addressConverter - converting Address Entity to Address DTO");
+        log.info("EmployeeService.addressConverter - converting Address Entity to Address DTO");
         return getAddressDtoList(addresses);
     }
 
