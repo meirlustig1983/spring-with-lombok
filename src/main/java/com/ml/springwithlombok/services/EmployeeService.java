@@ -5,29 +5,22 @@ import com.ml.springwithlombok.dao.Employee;
 import com.ml.springwithlombok.dto.AddressDto;
 import com.ml.springwithlombok.dto.EmployeeDto;
 import com.ml.springwithlombok.dto.RestContainer;
-import com.ml.springwithlombok.repositories.AddressRepository;
+
 import com.ml.springwithlombok.repositories.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class EmployeeService {
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeService.class);
     private final EmployeeRepository employeeRepository;
-    private final AddressRepository addressRepository;
-
-    @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository, AddressRepository addressRepository) {
-        this.employeeRepository = employeeRepository;
-        this.addressRepository = addressRepository;
-    }
-
 
     public RestContainer<?> findEmployees() {
         LOGGER.info("EmployeeService.findEmployees() - retrieving all employees");
@@ -40,7 +33,7 @@ public class EmployeeService {
     }
 
     public RestContainer<?> findEmployeesByLastName(String lastName) {
-        LOGGER.info("EmployeeService.findEmployeesByLastName() - retrieving all employees with lastName of {lastName}", lastName);
+        LOGGER.info("EmployeeService.findEmployeesByLastName - retrieving all employees with lastName of {}", lastName);
         final List<Employee> employees = employeeRepository.findByLastName(lastName);
         if (employees.isEmpty()) {
             return new RestContainer<>("No Employees Found", "Employee");
@@ -50,7 +43,7 @@ public class EmployeeService {
     }
 
     public RestContainer<?> findEmployeeById(Long id) {
-        LOGGER.info("EmployeeService.findEmployeeById(...) - retrieving employee with id of {id}", id);
+        LOGGER.info("EmployeeService.findEmployeeById(...) - retrieving employee with id of {}", id);
         final Optional<Employee> employee = employeeRepository.findById(id);
 
         if (employee.isPresent()) {

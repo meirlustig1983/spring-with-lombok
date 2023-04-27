@@ -4,24 +4,20 @@ import com.ml.springwithlombok.dao.Address;
 import com.ml.springwithlombok.dto.AddressDto;
 import com.ml.springwithlombok.dto.RestContainer;
 import com.ml.springwithlombok.repositories.AddressRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class AddressService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AddressService.class);
 
-    @Autowired
     private final AddressRepository addressRepository;
-
-    public AddressService(AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
-    }
 
     public RestContainer<?> findAddresses() {
         LOGGER.info("AddressService.findAddresses() - retrieving all addresses");
