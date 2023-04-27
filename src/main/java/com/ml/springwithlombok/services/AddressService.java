@@ -9,8 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.ml.springwithlombok.services.EmployeeService.getAddressDtoList;
 
 @RequiredArgsConstructor
 @Service
@@ -54,21 +55,6 @@ public class AddressService {
 
     private List<AddressDto> addressListConverter(List<Address> addresses) {
         LOGGER.info("AddressService.addressConverter - converting Address Entity to Address DTO");
-        List<AddressDto> addressDtos = new ArrayList<>();
-        for (Address address : addresses) {
-            addressDtos.add(
-                    new AddressDto(
-                            address.getId(),
-                            address.getAddressType(),
-                            address.getAddressLine1(),
-                            address.getAddressLine2(),
-                            address.getCity(),
-                            address.getState(),
-                            address.getZipCode(),
-                            address.getCreatedDate()
-                    )
-            );
-        }
-        return addressDtos;
+        return getAddressDtoList(addresses);
     }
 }
