@@ -51,37 +51,15 @@ public class EmployeeService {
 
     public EmployeeDto updateEmployeeStatus(final Long employeeId, final String employeeStatus) {
         LOGGER.info("EmployeeService.updateEmployeeStatus(...) - retrieving employee with employeeId of {} and updating with status {}", employeeId, employeeStatus);
-
         val employeeById = findEmployeeById(employeeId);
-        val employeeDto = new EmployeeDto(
-                employeeId,
-                employeeById.lastName(),
-                employeeById.firstName(),
-                employeeById.middleName(),
-                employeeById.suffix(),
-                employeeById.email(),
-                employeeById.addresses(),
-                EmployeeStatus.convert(employeeStatus),
-                employeeById.createdDate());
-
+        val employeeDto = employeeById.withEmployeeStatus(EmployeeStatus.convert(employeeStatus));
         return updateEmployee(employeeDto);
     }
 
     public EmployeeDto updateEmployeeEmail(final Long employeeId, final String employeeEmail) {
         LOGGER.info("EmployeeService.updateEmployeeEmail(...) - retrieving employee with employeeId of {} and updating with email {}", employeeId, employeeEmail);
-
         val employeeById = findEmployeeById(employeeId);
-        val employeeDto = new EmployeeDto(
-                employeeId,
-                employeeById.lastName(),
-                employeeById.firstName(),
-                employeeById.middleName(),
-                employeeById.suffix(),
-                employeeById.email(),
-                employeeById.addresses(),
-                employeeById.employeeStatus(),
-                employeeById.createdDate());
-
+        val employeeDto = employeeById.withEmail(employeeEmail);
         return updateEmployee(employeeDto);
     }
 
