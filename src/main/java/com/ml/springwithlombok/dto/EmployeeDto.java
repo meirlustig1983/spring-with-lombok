@@ -1,18 +1,19 @@
 package com.ml.springwithlombok.dto;
 
 import com.ml.springwithlombok.enums.EmployeeStatus;
+import lombok.NonNull;
 
 import java.util.Date;
 import java.util.List;
 
 public record EmployeeDto(
         Long id,
-        String lastName,
-        String firstName,
+        @NonNull String lastName,
+        @NonNull String firstName,
         String middleName,
         String suffix,
-        String email,
+        @NonNull String email,
         List<AddressDto> addresses,
-        EmployeeStatus employeeStatus,
-        Date createdDate) {
+        @NonNull EmployeeStatus employeeStatus,
+        @NonNull Date createdDate) {
 }

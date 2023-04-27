@@ -1,10 +1,12 @@
 package com.ml.springwithlombok.dto;
 
+import lombok.NonNull;
+
 import java.util.Date;
 
 public record EmployeeImageDto(
         Long id,
-        EmployeeDto employeeDto,
-        byte[] image,
-        Date createdDate) {
+        @NonNull EmployeeDto employeeDto,
+        @NonNull byte[] image,
+        @NonNull Date createdDate) {
 }
