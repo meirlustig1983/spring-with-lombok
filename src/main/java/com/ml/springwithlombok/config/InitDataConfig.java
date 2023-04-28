@@ -6,17 +6,12 @@ import com.ml.springwithlombok.dao.EmployeeImage;
 import com.ml.springwithlombok.repositories.AddressRepository;
 import com.ml.springwithlombok.repositories.EmployeeImageRepository;
 import com.ml.springwithlombok.repositories.EmployeeRepository;
-import lombok.Cleanup;
+import com.ml.springwithlombok.services.FileService;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.StreamUtils;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 @Slf4j
 @Configuration
@@ -25,7 +20,8 @@ public class InitDataConfig {
     @Bean
     public CommandLineRunner initData(EmployeeRepository employeeRepository,
                                       AddressRepository addressRepository,
-                                      EmployeeImageRepository employeeImageRepository) {
+                                      EmployeeImageRepository employeeImageRepository,
+                                      FileService fileService) {
         return args -> {
 
             val employeeBuilder = Employee.builder();
@@ -74,8 +70,8 @@ public class InitDataConfig {
 
             val employeeImageBuilder = EmployeeImage.builder();
 
-            val franklinImg = retrieveStockImage("benjamin_franklin.png");
-            val rooseveltImg = retrieveStockImage("theo_roosevelt.png");
+            val franklinImg = fileService.retrieveStockImage("benjamin_franklin.png");
+            val rooseveltImg = fileService.retrieveStockImage("theo_roosevelt.png");
 
             val theodoreImage = employeeImageBuilder
                     .employee(theodoreEmployee)
@@ -90,14 +86,5 @@ public class InitDataConfig {
             employeeImageRepository.save(theodoreImage);
             employeeImageRepository.save(franklinImage);
         };
-    }
-
-    private byte[] retrieveStockImage(String imageName) throws IOException {
-        log.info("LombokDemoApplication.retrieveStockImage() - attempting to retrieve the image");
-        ClassPathResource classPathResource = new ClassPathResource(imageName);
-        @Cleanup InputStream in = classPathResource.getInputStream();
-        byte[] imageBytes = StreamUtils.copyToByteArray(in);
-        log.info("LombokDemoApplication.retrieveStockImage() - byte[] length = " + imageBytes.length);
-        return imageBytes;
     }
 }
